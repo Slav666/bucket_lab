@@ -17,6 +17,13 @@ router.get('/', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+  const data = req.body;
+  collection
+    .insertOne(data)
+    .then( () => collection.find().toArray())
+    .then( (docs) => res.json(docs));
+});
 
 return router;
 };
