@@ -25,6 +25,14 @@ router.post('/', (req, res) => {
     .then( (docs) => res.json(docs));
 });
 
+router.delete('/:id', (req, res) => {
+  const data = req.body;
+  collection
+    .deleteOne(data)
+    .then( () => collection.find().toArray())
+    .then( (docs) => res.json(docs));
+});
+
 return router;
 };
 

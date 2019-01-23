@@ -27,6 +27,15 @@ DisplayWish.prototype.populateList = function (list) {
     console.dir(wish);
     listItem.textContent = `Before I die I want to ${wish.wish}`
     list.appendChild(listItem);
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', (event) => {
+      PubSub.publish('DisplayWish:DeleteButtonClicked', wish._id);
+    })
+    list.appendChild(deleteButton);
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    listItem.appendChild(checkbox);
   });
   return list;
 };
