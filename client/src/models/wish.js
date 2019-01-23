@@ -13,8 +13,16 @@ Wish.prototype.bindEvents = function () {
 };
 
 Wish.prototype.postWish = function(data){
-console.log(data);
-this.request.post(data);
+this.request.post(data)
+  .then((wishes) => {
+    PubSub.publish('Wish:Data-loaded', wishes)
+  })
 };
 
+Wish.prototype.getData = function(){
+  this.request.get()
+    .then((wishes) => {
+      PubSub.publish('Wish:Data-loaded', wishes)
+    })
+}
 module.exports = Wish;
